@@ -2,8 +2,6 @@ import React, { useEffect, useState } from 'react'
 import toast from 'react-hot-toast';
 import { useServer } from '../../App';
 import axios from 'axios';
-import { useCookies } from 'react-cookie';
-import { Navigate } from 'react-router-dom';
 import { useAuthContext } from '../Context/Context';
 import { useConversion } from '../Zustand/useConversation';
 import { useSocketContext } from '../Context/SocketContext';
@@ -58,7 +56,7 @@ export const SearchBar = () => {
 export const Chats = () => {
     const Server = useServer();
     const { user } = useAuthContext();
-    const { setUserUrl, userUrl, selectedConversation, setSelectedConversation, userList, setUserList } = useConversion();
+    const { setUserUrl, userUrl, selectedConversation, setSelectedConversation, userList, setUserList, messages } = useConversion();
     const { OnlineUsers } = useSocketContext();
 
     const FetchUsers = async () => {

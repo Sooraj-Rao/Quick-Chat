@@ -7,7 +7,7 @@ const Home = () => {
             <div className={`w-full bg-center bg-cover h-[calc(100vh-4rem)] bg-[url('../../home.jpg')] `}>
                 <div className="flex items-center justify-center w-full h-full bg-gray-900/40">
                     <div className="text-center">
-                        <h1 style={{ textShadow: '1px 1px 1px blue' }} className="text-3xl  font-semibold  text-white lg:text-7xl">ChatterHub: Connect. Chat. Explore.</h1>
+                        <h1 style={{ textShadow: '1px 1px 1px blue' }} className="text-3xl  font-semibold  text-white lg:text-7xl">QuickChat: Connect. Chat. Explore.</h1>
                         <div onClick={() => nav('/auth/signup')} className=" flex justify-center mt-10" >
                             <Button text={'Get Started'} />
                         </div>
@@ -22,12 +22,12 @@ export default Home
 
 export const Logo = () => {
     return (
-        <div className=" flex items-center">
+        <div className=" flex items-center h-[2rem]">
             <img src="../../logo.png" alt="" className=" rounded mr-1 h-7 w-7 bg-slate-500" />
-            <h1 className=" text-slate-400 p-2 text-center ">
-                CHATTER
-                <span className=" text-blue-400 pl-2">
-                    HUB
+            <h1 className=" text-slate-400 p-2 text-center text-lg ">
+                Quick
+                <span className=" text-blue-400">
+                    Chat
                 </span>
             </h1>
         </div>
@@ -35,10 +35,9 @@ export const Logo = () => {
 }
 
 export const Navbar = () => {
-    const { pathname } = useLocation()
     return (
         <nav className=" bg-slate-100 sticky top-0 shadow flex justify-around items-center py-3">
-            <Link to={`${pathname == '/c' ? '/c' : '/'}`} className={`${pathname == '/c' ? 'cursor-not-allowed' : ''} `}>
+            <Link to={'/c'}>
                 <Logo />
             </Link>
 

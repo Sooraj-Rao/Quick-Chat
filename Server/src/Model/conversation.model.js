@@ -15,6 +15,10 @@ const ConversationShcema = new mongoose.Schema(
         default: [],
       },
     ],
+    lastMessage: {
+      type: String, 
+      required: true,
+    },
   },
   { timestamps: true }
 );

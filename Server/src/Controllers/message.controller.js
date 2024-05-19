@@ -15,6 +15,7 @@ export const sendMessage = async (req, res) => {
     if (!conversation) {
       conversation = await Conversation.create({
         participants: [senderId, receiverId],
+        lastMessage: message,
       });
     }
     const newMessage = new Message({
@@ -24,6 +25,7 @@ export const sendMessage = async (req, res) => {
     });
     if (newMessage) {
       conversation.messages.push(newMessage._id);
+      conversation.lastMessage = message;
     }
     await Promise.all([conversation.save(), newMessage.save()]);
 
@@ -52,15 +54,14 @@ export const getMessage = async (req, res) => {
     const conversation = await Conversation.findOne({
       participants: { $all: [senderId, receiverId] },
     }).populate("messages");
-
+    console.log(conversation);
     if (!conversation)
       return res
         .status(200)
         .json({ error: false, message: "No data", data: null });
-
     return res
       .status(200)
-      .json({ error: false, message: "success", data: conversation.messages });
+      .json({ error: false, message: "success", data: conversation });
   } catch (error) {
     console.log(error);
     return res

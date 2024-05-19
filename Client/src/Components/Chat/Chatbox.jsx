@@ -4,7 +4,6 @@ import { useServer } from '../../App';
 import axios from 'axios';
 import toast from 'react-hot-toast';
 import { useAuthContext } from '../Context/Context';
-import { Loader } from '../Home';
 import useListenMessage from '../Hooks/useListenMessage';
 import { useSocketContext } from '../Context/SocketContext';
 import MessageLoader from '../Anim/Message.Loader';
@@ -88,14 +87,19 @@ export const MessageBox = () => {
         }, 1);
     }, [messages])
 
+    console.log(messages);
+
     return (
         <div className=' overflow-y-scroll h-[52vh] scrollbar'>
             {
                 loader ? <MessageLoader />
                     :
 
-                    messages?.length != 0 ?
-                        messages?.map((item, i) => {
+                    !messages?.messages ?
+                        <p className=' text-center py-2 text-slate-800'>
+                            Send a message to start Converstaion
+                        </p> :
+                        messages?.messages?.map((item, i) => {
                             const { message, receiverId, senderId, createdAt } = item;
                             const Time = new Date(createdAt).toLocaleString();
                             const reciever = selectedConversation._id == receiverId;
@@ -124,10 +128,7 @@ export const MessageBox = () => {
                                 </div>
                             )
                         })
-                        :
-                        <p className=' text-center py-2 text-slate-800'>
-                            Send a message to start Converstaion
-                        </p>
+
             }
         </div>
     )
