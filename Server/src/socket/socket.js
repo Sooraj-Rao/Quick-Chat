@@ -8,7 +8,7 @@ app.use(cors());
 
 const server = http.createServer(app);
 const io = new Server(server, {
-  cors: ["https://srj-chatter-hub.vercel.app", "http://localhost:5173/"],
+  cors: ["https://srj-quickchat.vercel.app", "http://localhost:5173/"],
 });
 
 const userSocketMap = {};
