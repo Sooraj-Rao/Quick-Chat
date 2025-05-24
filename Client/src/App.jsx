@@ -7,7 +7,7 @@ import Main from "./Components/Chat/Main"
 import { useAuthContext } from "./Components/Context/Context"
 
 export const useServer = () => {
-  return import.meta.env.VITE_SERVER;
+  return import.meta.env.VITE_SERVER|| 'http://localhost:3000/api';
 }
 
 const App = () => {

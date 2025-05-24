@@ -91,10 +91,10 @@ export const MessageBox = () => {
     }, [messages])
 
 
-    // let t = dateMessage && Object?.keys(dateMessage).map((item) => {
-    //     return (dateMessage[item])
+    let t = dateMessage && Object?.keys(dateMessage).map((item) => {
+        console.log(dateMessage[item])
 
-    // })
+    })
 
 
 
@@ -149,48 +149,34 @@ export const MessageBox = () => {
                         <p className=' text-center py-2 text-slate-800'>
                             Send a message to start Converstaion
                         </p> :
-                        dateMessage && Object?.keys(dateMessage)?.map((item, i) => {
-                            const day = item;
-                            return (dateMessage[item]).map((msg, key) => {
-
-                                const { message, receiverId, time } = msg;
-
-                                const reciever = selectedConversation._id == receiverId;
-                                const shake = message?.shouldShake ? 'shake' : ''
-                                return (
-                                    <>{key == 0 &&
-                                        <div className=' my-2  flex justify-center '>
-                                            <p className='bg-zinc-400 border border-slate-400 px-2 py-1 rounded-md text-sm'>
-                                                {day}
-
-                                            </p>
-                                        </div>
-                                    }
-                                        <div key={key} ref={lastMessageRef} className={` flex  mt-7 mb-6 px-2  relative
-                                ${reciever ? ' justify-end' : 'justify-start'}
-                                ${reciever ? shake : ''}
+                        messages?.map((item, i) => {
+                            const { message, receiverId, senderId, createdAt } = item;
+                            const Time = new Date(createdAt).toLocaleString();
+                            const reciever = selectedConversation._id == receiverId;
+                            const shake = message?.shouldShake ? 'shake' : ''
+                            return (
+                                <div key={i} ref={lastMessageRef} className={` flex  mt-7 mb-6 px-2  relative
+                            ${reciever ? ' justify-end' : 'justify-start'}
+                            ${reciever ? shake : ''}
+                            `}>
+                                    <span className={`  border-t-[.8rem] rotate-[270deg] -mr-1 transform border-l-[.8rem] self-end   border-l-slate-600 border-transparent
+                                ${reciever ? 'hidden' : 'block'}
+                                `}></span>
+                                    <h1 className={`  pt-1 pb-2 max-w-80 overflow-hidden h-fit px-4 flex items-center text-white rounded
+                                   ${reciever ? 'bg-blue-800' : 'bg-slate-600'}
                                 `}>
-                                            <span className={`  border-t-[.8rem] rotate-[270deg] -mr-1 transform border-l-[.8rem] self-end   border-l-slate-600 border-transparent
-                                    ${reciever ? 'hidden' : 'block'}
-                                    `}></span>
-                                            <h1 className={`  pt-1 pb-2 max-w-80 overflow-hidden h-fit px-4 flex items-center text-white rounded
-                                       ${reciever ? 'bg-blue-800' : 'bg-slate-600'}
-                                    `}>
-                                                <span>
-                                                    {message}
-                                                </span>
-                                            </h1>
-                                            <span className={`  border-t-[.8rem] border-l-[.8rem] self-end -ml-1  border-l-blue-800 border-transparent
-                                      ${!reciever ? 'hidden' : 'block'}
-                                      `}></span>
-                                            <span className=' absolute -bottom-[18px]   text-xs'>
-                                                {time ? time : 'Sending..'}
-                                            </span>
-                                        </div>
-                                    </>
-                                )
-                            })
-
+                                        <span>
+                                            {message}
+                                        </span>
+                                    </h1>
+                                    <span className={`  border-t-[.8rem] border-l-[.8rem] self-end -ml-1  border-l-blue-800 border-transparent
+                                  ${!reciever ? 'hidden' : 'block'}
+                                  `}></span>
+                                    <span className=' absolute -bottom-[18px]   text-xs'>
+                                        {createdAt ? Time : 'Sending..'}
+                                    </span>
+                                </div>
+                            )
                         })
 
             }

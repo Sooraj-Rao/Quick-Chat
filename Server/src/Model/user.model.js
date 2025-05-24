@@ -29,4 +29,4 @@ const userShcema = new mongoose.Schema(
   { timestamps: true }
 );
 
-export const User = mongoose.model("users", userShcema);
+export const User = mongoose.model("chat_users", userShcema);

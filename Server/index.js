@@ -7,11 +7,12 @@ import messageRoutes from "./src/Routes/message.route.js";
 import userRoutes from "./src/Routes/user.route.js";
 import { connectDb } from "./src/Db/connectDb.js";
 import { app, server } from "./src/socket/socket.js";
-import cors  from "cors";
+import cors from "cors";
 
 dotenv.config();
 
 const PORT = process.env.PORT;
+connectDb();
 app.use(cors());
 app.use(express.json());
 app.use(cookieParser());
@@ -21,10 +22,10 @@ app.use("/api/message", messageRoutes);
 app.use("/api/user", userRoutes);
 
 app.get("*", (req, res) => {
-  res.redirect("https://srj-chatter-hub.vercel.app");
+  // res.redirect("https://srj-chatter-hub.vercel.app");
+  res.send("ji");
 });
 
 server.listen(PORT, () => {
-  connectDb();
   console.log(`Server Running at ${PORT} `);
 });

@@ -14,7 +14,7 @@ const SocketContextProvider = ({ children }) => {
     const [socket, setSocket] = useState(null);
     const [OnlineUsers, setOnlineUsers] = useState([]);
     const { user } = useAuthContext();
-    const Server = import.meta.env.VITE_SOCKET;
+    const Server = import.meta.env.VITE_SOCKET||'http://localhost:3000';
 
     useEffect(() => {
         if (user?.user?.id) {

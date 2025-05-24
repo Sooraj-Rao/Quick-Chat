@@ -5,7 +5,7 @@ const ConversationShcema = new mongoose.Schema(
     participants: [
       {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "users",
+        ref: "chat_users",
       },
     ],
     messages: [
